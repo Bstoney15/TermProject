@@ -10,4 +10,4 @@ We are working on restructuring the branches to be more organized.
 There are currently 3 branches.
 1. Meeting Logs, this contains the meeting logs for our group meetings. It also currently has the main branch contents.
 2. Project Management Plan, this contains the Project Management Plan and supporting documents. It also currently has the main branch contents.
-3. Software Requirements Specifications, this contains the Software Requirements Specifications and supporting documents. It also currently has the main branch contents.
+3. Main branch, This branch is the, current, most up to date brand which includes the SRS document to be turned in by 3/25.
