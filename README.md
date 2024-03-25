@@ -1,3 +1,7 @@
+You will find the Software Requirements Specifications.pdf here.
+You will also find the Use Case Document.pdf here.
+Finally, you will find the main branch contents. Please ignore them as we work to reorganize this repository.
+=======
 Welcome to the Boolean Expression Evaluator Project for EECS 348 Software Engineering I
 
 Currently, the main branch has our initial commit of the Project Management Plan, it's supporting documents, and some meeting logs.
