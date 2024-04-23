@@ -1,0 +1,9 @@
+1 NOT error
+    11 Missing operand after NOT
+    12 NOT operator after operand
+2 Unrecognized operator symbol/Missing truth values/Invalid characters
+3 Mismatched parentheses
+    31 Too many open parentheses
+    32 Too many closed parentheses
+4 Empty Expression
+5 Double operator
