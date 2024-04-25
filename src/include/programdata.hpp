@@ -7,7 +7,7 @@ using namespace std;
 
 struct ProgramData {
     string expression;
-    int ERR_Falg;
+    int ERR_Flag;
     list<list<char>> vars;
     string output;
 };

@@ -10,9 +10,10 @@ using namespace std;
 
 int main(){
     ProgramData e;
-    ui(e);
-    parser(e);
+    e.expression = "Tv((TVF)VF)";
+    //ui(e);
+    //parser(e);
     evaluator(e);
-    output(e);
+    //output(e);
 }
 
