@@ -1,7 +1,0 @@
-struct ProgramData {
-    string expression;
-    string original_expr;
-    int ERR_Flag;
-    list<char> vars;
-    string output;
-};

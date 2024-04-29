@@ -1,6 +1,6 @@
 #include "parser.hpp"
 #include <iostream>
-/*
+
 void emptyCheck(ProgramData& data, int b){
     if (b == 0){
         data.ERR_Flag = 4;
@@ -108,18 +108,17 @@ void strip(ProgramData& data){
         data.expression.erase(target);
     }
 }
-*/
+
 
 void parser(ProgramData& data) {
-    return;
-    //cout << "parser ran" << endl;
-    //data.ERR_Flag = 0;
-    //data.original_expr = data.expression;
-    //strip(data);
-    //addVariables(data);
-    //errorCheck(data);
-    //if (data.ERR_Flag != 0){
-    //    return;
-    //}
+    cout << "parser ran" << endl;
+    data.ERR_Flag = 0;
+    data.original_expr = data.expression;
+    strip(data);
+    addVariables(data);
+    errorCheck(data);
+    if (data.ERR_Flag != 0){
+        return;
+    }
 }
 
