@@ -39,10 +39,11 @@ void printMenu(const ProgramData data) {
 
 int newExpression(ProgramData& data) {
     clearScreen();
-    cin.clear();
-    cin.ignore();
+    
+    
 
     string input_expr;
+    string tmp;
     char doEvaluate;
 
     cout << "Enter a new expression: ";
@@ -51,7 +52,9 @@ int newExpression(ProgramData& data) {
     data.original_expr  = input_expr;
     
     cout << "Evaluate the expression? (Y/N): ";
-    cin >> doEvaluate;
+    doEvaluate = toupper(cin.get());
+    cin.ignore(1000, '\n');
+    
 
     return (int)(doEvaluate == 'Y');
 }
@@ -69,16 +72,15 @@ void showVariables(const ProgramData data)
 
     cout << "\npress any key to continue..." << endl;
 
-    cin.ignore();
-    cin.get();
+    cin.ignore(1000, '\n');
+    
     return;
 
 }
 
 void deleteVariable(ProgramData& data) {
     clearScreen();
-    cin.clear();
-    cin.ignore();
+
 
     cout << "current Variables: \n\n";
 
@@ -91,7 +93,9 @@ void deleteVariable(ProgramData& data) {
 
     char variable;
     cout << "Enter the variable character: \n";
-    cin >> variable;
+    variable = cin.get();
+    cin.ignore(1000, '\n');
+    
 
     for(int i = 0; i < data.vars.size(); i++)
     {
@@ -100,44 +104,52 @@ void deleteVariable(ProgramData& data) {
             data.vars.erase(data.vars.begin() + i);
             cout << "Variable deleted\n";
             cout << "Press any key to continue...";
-            cin.ignore();
-            cin.get();
+            cin.ignore(1000, '\n');
+            
             return;
         }
     }
 
     cout << "Variable not found\n";
     cout << "Press any key to continue...";
-    cin.ignore();
-    cin.get();
+
+    cin.ignore(1000, '\n');
+
+    
+
 }
 
-void getVariable(ProgramData& data) {
+void makeVariable(ProgramData& data) {
     clearScreen();
-    cin.clear();
-    cin.ignore();
+
 
     char variable;
     char value;
+
     cout << "Enter the variable character: \n";
-    cin >> variable;
+    variable = cin.get();
+    cin.ignore(1000, '\n');
+
+    
 
     cout << "Enter the variable value: \n";
-    cin >> value;
+    value = cin.get();
+    cin.ignore(1000, '\n');
+
+    
+    
 
     data.vars.push_back({variable, value});
     
 }
 
 void ui(ProgramData& data) {
-    cin.ignore();
-    cin.clear();
-
     string input_expr;
     char selection;
     string variable;
     string value;
     int doesR;
+
         
     if(!data.output.empty()){
         clearScreen();
@@ -145,8 +157,10 @@ void ui(ProgramData& data) {
         cout << data.output << endl;
         cout << "Press any key to continue...";
 
-        cin.ignore();
-        cin.get();
+
+        cin.ignore(1000, '\n');
+        
+        
 
         data.output = "";
         data.ERR_Flag = 0;
@@ -155,32 +169,34 @@ void ui(ProgramData& data) {
     do {
 
         printMenu(data);
-        cin >> selection;
-        cout << "\n";
+        selection = toupper(cin.get());
+        if(selection != '\n') cin.ignore(1000, '\n');
+        
+        
+    
 
         // Define program behavior for selection cases
         switch (selection) {
 
             // Selection for entering a new expression
             case('N'):
-            doesR =  newExpression(data);
-            if(doesR == 1)
-            {
-                return;
-            }else
-            {
-                clearScreen();
-            }
+                doesR =  newExpression(data);
+                if(doesR == 1)
+                {
+                    return;
+                }else
+                {
+                    clearScreen();
+                }
             break;
-
             // Selection for using the last expression
             case('E'):
                 if(data.expression.empty())
                 {
+                    clearScreen();
                     cout << "No expression to evaluate\n";
                     cout << "Press any key to continue...";
-                    cin.ignore();
-                    cin.get();
+                    cin.ignore(1000, '\n');
                     break;
                 }
                 else{
@@ -188,7 +204,7 @@ void ui(ProgramData& data) {
                 }
             // Selection for defining a new variable
             case ('D'): 
-                getVariable(data);
+                makeVariable(data);
                 break;
 
             // Selection for current variables request
