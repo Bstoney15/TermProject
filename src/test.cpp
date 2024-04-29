@@ -2,10 +2,10 @@
 #include <iostream>
 #include "programdata.hpp"
 #include "evaluator.hpp"
+#include "parser.hpp"
 using namespace std;
 
-
-int main(){
+void evaltest(){
     ProgramData e;
 
     e.expression = "F|((T&F)|F)";
@@ -61,4 +61,36 @@ int main(){
     e.expression = "T&(F@(!T|F))";
     evaluator(e);
     std::cout << "output 11: " << e.expression << std::endl;
+}
+
+void parsetest()
+{
+    ProgramData e;
+    e.expression = "X | ( ( T & F ) | F ) ";
+    cout << "errors:" << e.ERR_Flag << endl;
+    cout << "output: " << e.expression << endl;
+
+    e.expression = "!(T@F)&T";
+    cout << "errors:" << e.ERR_Flag << endl;
+    cout << "output: " << e.expression << endl;
+
+    e.expression = "T|(!F&T)";
+    cout << "errors:" << e.ERR_Flag << endl;
+    cout << "output: " << e.expression << endl;
+
+    e.expression = "!!(T|F)&(T@F)";
+    cout << "errors:" << e.ERR_Flag << endl;
+    cout << "output: " << e.expression << endl;
+
+    e.expression = "T&(F@(!T|F))";
+    cout << "errors:" << e.ERR_Flag << endl;
+    cout << "output: " << e.expression << endl;
+
+    e.expression = "F@(T$F)&T";
+    cout << "errors:" << e.ERR_Flag << endl;
+    cout << "output: " << e.expression << endl;
+}
+
+int main(){
+    parsetest();
 }

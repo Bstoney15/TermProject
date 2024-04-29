@@ -1,7 +1,7 @@
 #ifndef programdata_hpp
 #define programdata_hpp
 #include <string>
-#include <list>
+#include <vector>
 using namespace std;
 
 
@@ -9,7 +9,7 @@ struct ProgramData {
     string expression;
     string original_expr;
     int ERR_Flag;
-    list<list<char>> vars;
+    vector<vector<char>> vars;
     string output;
 };
 
