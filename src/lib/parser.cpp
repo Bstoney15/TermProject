@@ -84,12 +84,19 @@ void opCheck(ProgramData& data, int b){
                     return;
                 }
                 break;
+            case('T'):
+                if(data.expression[i+1] == 'T' || data.expression[i+1] == 'F')
+                {
+                    data.ERR_Flag = 31;
+                    return;
+                }
+                break;
             default:
-                if(ops.find(data.expression[i]) != string::npos && data.expression[i] != 'T' && data.expression[i] != 'F' && data.expression[i] != '(' && data.expression[i] == ')')
+                if(ps.find(data.expression[i]) == string::npos)
                 {
                     data.ERR_Flag = 21;
                     return;
-                }
+                    }
                 break;
         }
     }
@@ -139,9 +146,7 @@ void strip(ProgramData& data){
 
 
 void parser(ProgramData& data) {
-    cout << "parser ran" << endl;
     data.ERR_Flag = 0;
-    data.original_expr = data.expression;
     strip(data);
     addVariables(data);
     errorCheck(data);
