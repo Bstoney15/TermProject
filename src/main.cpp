@@ -10,59 +10,13 @@ using namespace std;
 
 int main(){
     ProgramData e;
-
-    e.expression = "F|((T&F)|F)";
-    evaluator(e);
-    cout << "output 1: " << e.expression << endl;
-
-        // Test case 1
-    e.expression = "F|(T&F)";
-    evaluator(e);
-    std::cout << "output 2: " << e.expression << std::endl;
-
-    // Test case 2
-    e.expression = "!(T@F)&T";
-    evaluator(e);
-    std::cout << "output 3: " << e.expression << std::endl;
-
-    // Test case 3
-    e.expression = "T$F";
-    evaluator(e);
-    std::cout << "output 4: " << e.expression << std::endl;
-
-    // Test case 4
-    e.expression = "T|(!F&T)";
-    evaluator(e);
-    std::cout << "output 5: " << e.expression << std::endl;
-
-    // Test case 5
-    e.expression = "((T@F)@T)|F";
-    evaluator(e);
-    std::cout << "output 6: " << e.expression << std::endl;
-
-    // Test case 6
-    e.expression = "T&F@!T";
-    evaluator(e);
-    std::cout << "output 7: " << e.expression << std::endl;
-
-    // Test case 7
-    e.expression = "!T$T";
-    evaluator(e);
-    std::cout << "output 8: " << e.expression << std::endl;
-
-    // Test case 8
-    e.expression = "!!(T|F)&(T@F)";
-    evaluator(e);
-    std::cout << "output 9: " << e.expression << std::endl;
-
-    // Test case 9
-    e.expression = "F@(T$F)&T";
-    evaluator(e);
-    std::cout << "output 10: " << e.expression << std::endl;
-
-    // Test case 10
-    e.expression = "T&(F@(!T|F))";
-    evaluator(e);
-    std::cout << "output 11: " << e.expression << std::endl;
+    while(e.expression != "exit")
+    {
+        ui(e);
+        parser(e);
+        evaluator(e);
+        output(e);
+    }
+    return 0;
 }
 
