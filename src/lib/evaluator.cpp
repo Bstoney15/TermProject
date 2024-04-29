@@ -1,4 +1,5 @@
 #include "evaluator.hpp"
+#include "ops.hpp"
 #include <iostream>
 
 
@@ -61,11 +62,51 @@ void evaluator(ProgramData& data) {
 
 
         data.expression[firstParenthesis] = tmp.expression[0];
-        cout << data.expression << endl;
     };
 
-    cout << data.expression << endl;
-    data.expression.erase();
-    data.expression.append("x");
+    while(data.expression.find('!') != string::npos)
+    {
+        int i = data.expression.find('!');
+        if(data.expression[i + 1] == '!')
+        {
+            data.expression.erase(i, 1);
+            data.expression.erase(i, 1);
+            continue;
+        }
+        data.expression[i] = notC(data.expression[i + 1]);
+        data.expression.erase(i + 1, 1);
+    }
+
+    while(data.expression.find('&') != string::npos)
+    {
+        int i = data.expression.find('&');
+        data.expression[i - 1] = andC(data.expression[i - 1], data.expression[i + 1]);
+        data.expression.erase(i + 1, 1);
+        data.expression.erase(i, 1);
+    }
+
+    while(data.expression.find('@') != string::npos)
+    {
+        int i = data.expression.find('@');
+        data.expression[i - 1] = nandC(data.expression[i - 1], data.expression[i + 1]);
+        data.expression.erase(i + 1, 1);
+        data.expression.erase(i, 1);
+    }
+
+    while(data.expression.find('|') != string::npos)
+    {
+        int i = data.expression.find('|');
+        data.expression[i - 1] = orC(data.expression[i - 1], data.expression[i + 1]);
+        data.expression.erase(i + 1, 1);
+        data.expression.erase(i, 1);
+    }
+
+    while(data.expression.find('$') != string::npos)
+    {
+        int i = data.expression.find('$');
+        data.expression[i - 1] = xorC(data.expression[i - 1], data.expression[i + 1]);
+        data.expression.erase(i + 1, 1);
+        data.expression.erase(i, 1);
+    }
     
 }
