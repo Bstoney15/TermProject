@@ -6,9 +6,9 @@ using namespace std;
 
 
 struct ProgramData {
-    string expression;
-    string original_expr;
-    int ERR_Flag;
+    string expression = "";
+    string original_expr = "";
+    int ERR_Flag = 0;
     vector<vector<char>> vars;
     string output;
 };
