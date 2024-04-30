@@ -46,6 +46,7 @@ void evaluator(ProgramData& data) {
             }
         }
         tmp.expression = "";
+        tmp.ERR_Flag = 0;
         firstParenthesis;
         string nextChar;
 
