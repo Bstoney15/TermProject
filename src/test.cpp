@@ -66,7 +66,7 @@ void evaltest(){
 void parsetest()
 {
     ProgramData e;
-    e.expression = "TT";
+    e.expression = "((T&F)|F !T&";
     parser(e);
     cout << "errors:" << e.ERR_Flag << endl;
     cout << "output: " << e.expression << endl;

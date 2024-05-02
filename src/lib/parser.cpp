@@ -20,12 +20,12 @@ void parenthesesCheck(ProgramData& data, int b){
         }
         if(openParenthesis < 0)
         {
-            data.ERR_Flag = 5;
+            data.ERR_Flag = 41;
             return;
         }
     }
     if (openParenthesis != 0){
-        data.ERR_Flag = 6;
+        data.ERR_Flag = 42;
         return;
     }
 }
