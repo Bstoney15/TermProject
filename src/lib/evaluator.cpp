@@ -4,12 +4,14 @@
 
 
 void evaluator(ProgramData& data) {
-    //std::cout << "eval ran: " << data.expression << endl;
     int firstParenthesis;
     int lastParenthesis;
     ProgramData tmp;
 
-    
+    if(data.ERR_Flag != 0)
+    {
+        return;
+    }
 
     while(data.expression.find('(') != string::npos) // while there is still parenthesis in the program
     {
@@ -43,7 +45,7 @@ void evaluator(ProgramData& data) {
 
             }
         }
-        tmp.expression = "";
+
         firstParenthesis;
         string nextChar;
 

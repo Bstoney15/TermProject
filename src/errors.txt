@@ -1,9 +1,14 @@
-1 NOT error
-    11 Missing operand after NOT
-    12 NOT operator after operand
-2 Unrecognized operator symbol/Missing truth values/Invalid characters
-3 Mismatched parentheses
-    31 Too many open parentheses
-    32 Too many closed parentheses
-4 Empty Expression
-5 Double operator
+1 operator error
+    11 Not misuse
+    12 and misuse
+    13 nand misuse
+    14 or misuse
+    15 xor misuse
+    16 first or last character is an operand
+2 variable error
+    21 undefined variable
+3 value error
+    31 True or false back to back
+4 parentehses error
+    41 parentheses closed before it was opened
+    42 parentehses was never closed

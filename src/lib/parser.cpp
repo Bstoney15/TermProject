@@ -8,45 +8,129 @@ void emptyCheck(ProgramData& data, int b){
 }
 
 void parenthesesCheck(ProgramData& data, int b){
-    int left = 0;
-    int right = 0;
-    for (int i = 0; i < b; i++){
-        if (data.expression[i] == '('){
-                left++;
-            }
-        if (data.expression[i] == ')'){
-            right++;
+    int openParenthesis = 0;
+    for(int i = 0; i < b; i++){
+        if(data.expression[i] == '(')
+        {
+            openParenthesis++;
+        }
+        if(data.expression[i] == ')')
+        { 
+            openParenthesis--;
+        }
+        if(openParenthesis < 0)
+        {
+            data.ERR_Flag = 41;
+            return;
         }
     }
-    if (left > right){
-        data.ERR_Flag = 31;
-    }
-    if (right > left){
-        data.ERR_Flag = 32;
+    if (openParenthesis != 0){
+        data.ERR_Flag = 42;
+        return;
     }
 }
 
 void opCheck(ProgramData& data, int b){
-    for (int i = 0; i < b; i++){
-        char op1 = data.expression[i];
-        char op2 = data.expression[i+1];
-        //cout << op1 << "," << op2 << endl;
-        if (op1 != '&' && op1 != '|' && op1 != '!' && op1 != '@' && op1 != '$' && op1 != 'T' && op1 != 'F' && op1 != '(' && op1 != ')'){
-            data.ERR_Flag = 2;
+    string ops = "&@|$";
+    string ps = "()";
+
+
+    if(ops.find(data.expression[0]) != string::npos || ops.find(data.expression[b-1]) != string::npos)
+    {
+        data.ERR_Flag = 16;
+    }
+
+
+    if(data.expression.size() > 2)
+    {
+        for (int i = 1; i < b-1; i++){
+            switch (data.expression[i])
+            {
+                case('!'):
+                    if(data.expression[i+1] != '!' && data.expression[i+1] != 'T' && data.expression[i+1] != 'F')
+                    {
+                        data.ERR_Flag = 11;
+                        return;
+                    }
+                    break;
+                case('&'):
+                    if(ops.find(data.expression[i+1]) != string::npos || ops.find(data.expression[i-1]) != string::npos || data.expression[i-1] == '(' || data.expression[i+1] == ')')
+                    {
+                        data.ERR_Flag = 12;
+                        return;
+                    }
+                    break;
+                case('@'):
+                    if(ops.find(data.expression[i+1]) != string::npos || ops.find(data.expression[i-1]) != string::npos || data.expression[i-1] == '(' || data.expression[i+1] == ')')
+                    {
+                        data.ERR_Flag = 13;
+                        return;
+                    }
+                    break;
+                case('|'):
+                    if(ops.find(data.expression[i+1]) != string::npos || ops.find(data.expression[i-1]) != string::npos || data.expression[i-1] == '(' || data.expression[i+1] == ')')
+                    {
+                        data.ERR_Flag = 14;
+                        return;
+                    }
+                    break;
+                case('$'):
+                    if(ops.find(data.expression[i+1]) != string::npos || ops.find(data.expression[i-1]) != string::npos || data.expression[i-1] == '(' || data.expression[i+1] == ')')
+                    {
+                        data.ERR_Flag = 15;
+                        return;
+                    }
+                    break;
+                case('F'):
+                    if(data.expression[i+1] == 'T' || data.expression[i+1] == 'F')
+                    {
+                        data.ERR_Flag = 31;
+                        return;
+                    }
+                    break;
+                case('T'):
+                    if(data.expression[i+1] == 'T' || data.expression[i+1] == 'F')
+                    {
+                        data.ERR_Flag = 31;
+                        return;
+                    }
+                    break;
+                default:
+                    if(ps.find(data.expression[i]) == string::npos)
+                    {
+                        data.ERR_Flag = 21;
+                        return;
+                        }
+                    break;
+            }
+        }
+        if((data.expression[0] != 'T' && data.expression[0] != 'F' && data.expression[0] != '(') || (data.expression[b - 1] != 'T' && data.expression[b - 1] != 'F' && data.expression[b - 1] != ')'))
+        {
+            data.ERR_Flag = 10;
             return;
         }
-        if (op1 == '!' && (op2 != 'T' && op2 != 'F')){
+    }
+    else if(data.expression.length() == 2)
+    {
+        if(data.expression[0] == '!' && (data.expression[1] != 'T' || data.expression[1] != 'F'))
+        {
             data.ERR_Flag = 11;
             return;
         }
-        if (op2 == '!' && (op1 == 'T' || op1 == 'F')){
-            data.ERR_Flag = 12;
+        else if(data.expression[0] == 'T' || data.expression[0] == 'F')
+        {
+            data.ERR_Flag = 31;
             return;
         }
-        if (op1 == op2){
-            data.ERR_Flag = 5;
+    }
+    else
+    {
+        if(data.expression[0] != 'T' && data.expression[0] != 'F')
+        {
+            data.ERR_Flag = 10;
             return;
         }
+    
     }
 }
 
@@ -70,55 +154,33 @@ void errorCheck(ProgramData& data){
 }
 
 void addVariables(ProgramData& data){
-    char tempvars[data.vars.size()];
-    int it = 0;
-    for (auto i : data.vars){
-        tempvars[it] = i;
-        it++;
-    }
-    for (int s = 0; s < data.expression.length(); s++){
-        char op = data.expression[s];
-        if (op != '&' && op != '|' && op != '!' && op != '@' && op != '$' && op != 'T' && op != 'F' && op != '(' && op != ')'){
-            for (int i = 0; i < data.vars.size(); i++){
-                if (op == tempvars[i]){
-                    data.expression[s] = tempvars[i+1];
-                }
-            }
+    size_t pos = string::npos;
+    for(int j = 0; j < data.vars.size(); j++)
+    {  
+        pos = data.expression.find(data.vars[j][0]);
+        while (pos != string::npos)
+        {
+            data.expression[pos] = data.vars[j][1];
+            pos = data.expression.find(data.vars[j][0]);
         }
+        
     }
 }
 
-void remove(ProgramData& data, int s){
-    for (;s < data.expression.length(); s++){
-        data.expression[s] = data.expression[s+1];
-    }
-}
 
 void strip(ProgramData& data){
-    int counter = 0;
-    for (int i = 0; i < data.expression.length(); i++){
-        if (data.expression[i] == ' '){
-            remove(data, i);
-            i--;
-            counter++;
-        }
-    }
-    int target = data.expression.length()-counter;
-    for (int i = 1; i < counter; i++){
-        data.expression.erase(target);
+    size_t pos = data.expression.find(" ");
+    while (pos != string::npos){
+        data.expression.erase(pos, 1);
+        pos = data.expression.find(" ");
     }
 }
 
 
 void parser(ProgramData& data) {
-    cout << "parser ran" << endl;
     data.ERR_Flag = 0;
-    data.original_expr = data.expression;
     strip(data);
     addVariables(data);
     errorCheck(data);
-    if (data.ERR_Flag != 0){
-        return;
-    }
 }
 
