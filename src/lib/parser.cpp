@@ -34,7 +34,6 @@ void opCheck(ProgramData& data, int b){
     string ops = "&@|$";
     string ps = "()";
 
-    cout << "b: " << b << endl;
 
     if(ops.find(data.expression[0]) != string::npos || ops.find(data.expression[b-1]) != string::npos)
     {
@@ -48,7 +47,7 @@ void opCheck(ProgramData& data, int b){
             switch (data.expression[i])
             {
                 case('!'):
-                    if(data.expression[i+1] != '!' || data.expression[i+1] != 'T' || data.expression[i+1] != 'F')
+                    if(data.expression[i+1] != '!' && data.expression[i+1] != 'T' && data.expression[i+1] != 'F')
                     {
                         data.ERR_Flag = 11;
                         return;
@@ -104,6 +103,11 @@ void opCheck(ProgramData& data, int b){
                         }
                     break;
             }
+        }
+        if((data.expression[0] != 'T' && data.expression[0] != 'F' && data.expression[0] != '(') || (data.expression[b - 1] != 'T' && data.expression[b - 1] != 'F' && data.expression[b - 1] != ')'))
+        {
+            data.ERR_Flag = 10;
+            return;
         }
     }
     else if(data.expression.length() == 2)
