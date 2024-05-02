@@ -34,71 +34,99 @@ void opCheck(ProgramData& data, int b){
     string ops = "&@|$";
     string ps = "()";
 
+    cout << "b: " << b << endl;
+
     if(ops.find(data.expression[0]) != string::npos || ops.find(data.expression[b-1]) != string::npos)
     {
         data.ERR_Flag = 16;
     }
 
-    for (int i = 1; i < b-1; i++){
-        switch (data.expression[i])
-        {
-            case('!'):
-                if(data.expression[i+1] != '!' || data.expression[i+1] != 'T' || data.expression[i+1] != 'F')
-                {
-                    data.ERR_Flag = 11;
-                    return;
-                }
-                break;
-            case('&'):
-                if(ops.find(data.expression[i+1]) != string::npos || ops.find(data.expression[i-1]) != string::npos || data.expression[i-1] == '(' || data.expression[i+1] == ')')
-                {
-                    data.ERR_Flag = 12;
-                    return;
-                }
-                break;
-            case('@'):
-                if(ops.find(data.expression[i+1]) != string::npos || ops.find(data.expression[i-1]) != string::npos || data.expression[i-1] == '(' || data.expression[i+1] == ')')
-                {
-                    data.ERR_Flag = 13;
-                    return;
-                }
-                break;
-            case('|'):
-                if(ops.find(data.expression[i+1]) != string::npos || ops.find(data.expression[i-1]) != string::npos || data.expression[i-1] == '(' || data.expression[i+1] == ')')
-                {
-                    data.ERR_Flag = 14;
-                    return;
-                }
-                break;
-            case('$'):
-                if(ops.find(data.expression[i+1]) != string::npos || ops.find(data.expression[i-1]) != string::npos || data.expression[i-1] == '(' || data.expression[i+1] == ')')
-                {
-                    data.ERR_Flag = 15;
-                    return;
-                }
-                break;
-            case('F'):
-                if(data.expression[i+1] == 'T' || data.expression[i+1] == 'F')
-                {
-                    data.ERR_Flag = 31;
-                    return;
-                }
-                break;
-            case('T'):
-                if(data.expression[i+1] == 'T' || data.expression[i+1] == 'F')
-                {
-                    data.ERR_Flag = 31;
-                    return;
-                }
-                break;
-            default:
-                if(ps.find(data.expression[i]) == string::npos)
-                {
-                    data.ERR_Flag = 21;
-                    return;
+
+    if(data.expression.size() > 2)
+    {
+        for (int i = 1; i < b-1; i++){
+            switch (data.expression[i])
+            {
+                case('!'):
+                    if(data.expression[i+1] != '!' || data.expression[i+1] != 'T' || data.expression[i+1] != 'F')
+                    {
+                        data.ERR_Flag = 11;
+                        return;
                     }
-                break;
+                    break;
+                case('&'):
+                    if(ops.find(data.expression[i+1]) != string::npos || ops.find(data.expression[i-1]) != string::npos || data.expression[i-1] == '(' || data.expression[i+1] == ')')
+                    {
+                        data.ERR_Flag = 12;
+                        return;
+                    }
+                    break;
+                case('@'):
+                    if(ops.find(data.expression[i+1]) != string::npos || ops.find(data.expression[i-1]) != string::npos || data.expression[i-1] == '(' || data.expression[i+1] == ')')
+                    {
+                        data.ERR_Flag = 13;
+                        return;
+                    }
+                    break;
+                case('|'):
+                    if(ops.find(data.expression[i+1]) != string::npos || ops.find(data.expression[i-1]) != string::npos || data.expression[i-1] == '(' || data.expression[i+1] == ')')
+                    {
+                        data.ERR_Flag = 14;
+                        return;
+                    }
+                    break;
+                case('$'):
+                    if(ops.find(data.expression[i+1]) != string::npos || ops.find(data.expression[i-1]) != string::npos || data.expression[i-1] == '(' || data.expression[i+1] == ')')
+                    {
+                        data.ERR_Flag = 15;
+                        return;
+                    }
+                    break;
+                case('F'):
+                    if(data.expression[i+1] == 'T' || data.expression[i+1] == 'F')
+                    {
+                        data.ERR_Flag = 31;
+                        return;
+                    }
+                    break;
+                case('T'):
+                    if(data.expression[i+1] == 'T' || data.expression[i+1] == 'F')
+                    {
+                        data.ERR_Flag = 31;
+                        return;
+                    }
+                    break;
+                default:
+                    if(ps.find(data.expression[i]) == string::npos)
+                    {
+                        data.ERR_Flag = 21;
+                        return;
+                        }
+                    break;
+            }
         }
+    }
+    else if(data.expression.length() == 2)
+    {
+        if(data.expression[0] == '!' && (data.expression[1] != 'T' || data.expression[1] != 'F'))
+        {
+            data.ERR_Flag = 11;
+            return;
+        }
+        else if(data.expression[0] == 'T' || data.expression[0] == 'F')
+        {
+            data.ERR_Flag = 31;
+            return;
+        }
+    }
+    else
+    {
+        if(data.expression[0] != 'T' && data.expression[0] != 'F')
+        {
+            data.ERR_Flag = 10;
+            return;
+        }
+    
     }
 }
 

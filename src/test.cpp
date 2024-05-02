@@ -66,29 +66,11 @@ void evaltest(){
 void parsetest()
 {
     ProgramData e;
-    e.expression = "X | ( ( T & F ) | F ) ";
+    e.expression = "TT";
+    parser(e);
     cout << "errors:" << e.ERR_Flag << endl;
     cout << "output: " << e.expression << endl;
 
-    e.expression = "!(T@F)&T";
-    cout << "errors:" << e.ERR_Flag << endl;
-    cout << "output: " << e.expression << endl;
-
-    e.expression = "T|(!F&T)";
-    cout << "errors:" << e.ERR_Flag << endl;
-    cout << "output: " << e.expression << endl;
-
-    e.expression = "!!(T|F)&(T@F)";
-    cout << "errors:" << e.ERR_Flag << endl;
-    cout << "output: " << e.expression << endl;
-
-    e.expression = "T&(F@(!T|F))";
-    cout << "errors:" << e.ERR_Flag << endl;
-    cout << "output: " << e.expression << endl;
-
-    e.expression = "F@(T$F)&T";
-    cout << "errors:" << e.ERR_Flag << endl;
-    cout << "output: " << e.expression << endl;
 }
 
 int main(){
