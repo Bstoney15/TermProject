@@ -47,7 +47,7 @@ void opCheck(ProgramData& data, int b){
             switch (data.expression[i])
             {
                 case('!'):
-                    if(data.expression[i+1] != '!' && data.expression[i+1] != 'T' && data.expression[i+1] != 'F')
+                    if(data.expression[i+1] != '!' && data.expression[i+1] != 'T' && data.expression[i+1] != 'F' && data.expression[i+1] != '(')
                     {
                         data.ERR_Flag = 11;
                         return;
@@ -104,7 +104,7 @@ void opCheck(ProgramData& data, int b){
                     break;
             }
         }
-        if((data.expression[0] != 'T' && data.expression[0] != 'F' && data.expression[0] != '(') || (data.expression[b - 1] != 'T' && data.expression[b - 1] != 'F' && data.expression[b - 1] != ')'))
+        if((data.expression[0] != 'T' && data.expression[0] != 'F' && data.expression[0] != '(' && data.expression[0] != '!') || (data.expression[b - 1] != 'T' && data.expression[b - 1] != 'F' && data.expression[b - 1] != ')'))
         {
             data.ERR_Flag = 10;
             return;

@@ -66,7 +66,7 @@ void evaltest(){
 void parsetest()
 {
     ProgramData e;
-    e.expression = "A&T";
+    e.expression = "(((((T|F)&F)|(T&(T|F)))@(T@T))$(!(T|F)))";
     parser(e);
     cout << "errors:" << e.ERR_Flag << endl;
     cout << "output: " << e.expression << endl;
