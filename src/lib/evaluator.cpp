@@ -13,6 +13,7 @@ void evaluator(ProgramData& data) {
         return;
     }
 
+
     while(data.expression.find('(') != string::npos) // while there is still parenthesis in the program
     {
         for(int i = 0; i < data.expression.size(); i++)
@@ -49,6 +50,7 @@ void evaluator(ProgramData& data) {
         firstParenthesis;
         string nextChar;
 
+        tmp.expression = "";
         for(int index = firstParenthesis + 1; index < lastParenthesis; index++) // loads tmp expression with expression insides parenthesis
         {
             nextChar = data.expression[index];
@@ -57,11 +59,11 @@ void evaluator(ProgramData& data) {
         
         evaluator(tmp);
 
+
         for(int index = firstParenthesis + 1; index <= lastParenthesis; index++) // erases equation within parenthesis
         {
             data.expression.erase(firstParenthesis + 1, 1);
         }
-
 
         data.expression[firstParenthesis] = tmp.expression[0];
     };
