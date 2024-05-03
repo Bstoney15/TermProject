@@ -1,13 +1,21 @@
-You will find the Software Requirements Specifications.pdf here.
-You will also find the Use Case Document.pdf here.
-Finally, you will find the main branch contents. Please ignore them as we work to reorganize this repository.
 =======
 Welcome to the Boolean Expression Evaluator Project for EECS 348 Software Engineering I
 
-Currently, the main branch has our initial commit of the Project Management Plan, it's supporting documents, and some meeting logs.
-We are working on restructuring the branches to be more organized.
+The Project is Complete and the main branch is the only one with the source code. 
 
-There are currently 3 branches.
-1. Meeting Logs, this contains the meeting logs for our group meetings. It also currently has the main branch contents.
-2. Project Management Plan, this contains the Project Management Plan and supporting documents. It also currently has the main branch contents.
-3. Main branch, This branch is the, current, most up to date brand which includes the SRS document to be turned in by 3/25.
+This git includes:
+1. All of the artifacts surrounding the project are in the artifacts folder
+2. The source code for the project are in the src folder
+3. meeting notes from the team meetings are in the meetingsLogs folder
+
+The instructions to build this project are in the user manuel, but to make it easier on you (the user)
+i will also list them below.
+
+1.Download the zip the git repository
+2.extract the zip to a folder
+3.open the extracted folder into a terminal by right clicking on the folder
+4.while in the terminal enter "cd src"
+5.while in the terminal enter "make"
+6.there should now be a updated executed file called main in your src folder.
+you should be able to run anywhere on your computer. You can delete the rest of the 
+repository off your system if needed. 
